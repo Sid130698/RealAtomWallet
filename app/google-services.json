@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "555852595497",
+    "firebase_url": "https://atomwallet-f214d.firebaseio.com",
+    "project_id": "atomwallet-f214d",
+    "storage_bucket": "atomwallet-f214d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:555852595497:android:869097288759b37155b738",
+        "android_client_info": {
+          "package_name": "com.example.atomwallet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "555852595497-abj852s5a34q72p0tge3nd6rcpcf7ocb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBNxkuHWa-35B4jJA-uEc1QUdzx792_Ly0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "555852595497-abj852s5a34q72p0tge3nd6rcpcf7ocb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

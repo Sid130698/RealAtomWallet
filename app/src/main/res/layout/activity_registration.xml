@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegistrationActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/atmbackg"
+        android:alpha="0.2"
+        >
+
+
+    </RelativeLayout>
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/imageRegistrationLogo"
+
+        android:layout_centerInParent="false"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/registration"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="200dp"
+        android:layout_marginBottom="23dp"
+        />
+    <EditText
+        android:layout_width="250dp"
+        android:layout_height="55dp"
+        android:hint="Enter your Email-Id"
+        android:id="@+id/RegUserIdEditText"
+        android:background="#ccffcc"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/imageRegistrationLogo"
+        android:textSize="25sp"
+        android:padding="8dp"/>
+    <EditText
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:imeActionId="4"
+        android:imeActionLabel="send"
+        android:imeOptions="actionSend"
+        android:inputType="textPassword"
+        android:textSize="25sp"
+        android:background="#ccffcc"
+        android:id="@+id/RegPasswordEditText"
+        android:layout_below="@+id/RegUserIdEditText"
+        android:hint="Password"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="8dp"
+        android:padding="8dp"/>
+    <EditText
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:imeActionId="4"
+        android:imeActionLabel="send"
+        android:imeOptions="actionSend"
+        android:inputType="text"
+        android:textSize="25sp"
+        android:background="#ccffcc"
+        android:id="@+id/yourNameEditText"
+        android:layout_below="@+id/RegPasswordEditText"
+        android:hint="Enter your Name"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="8dp"
+        android:padding="8dp"/>
+    <EditText
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:imeActionId="4"
+        android:imeActionLabel="send"
+        android:imeOptions="actionSend"
+        android:inputType="text"
+        android:textSize="25sp"
+        android:background="#ccffcc"
+        android:id="@+id/phoneNumberEditText"
+        android:layout_below="@+id/yourNameEditText"
+        android:hint="Enter mobil No."
+        android:layout_centerHorizontal="true"
+        android:layout_margin="8dp"
+        android:padding="8dp"/>
+
+    <Button
+        android:id="@+id/RegSubmitButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/phoneNumberEditText"
+        android:text="Submit"
+       />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/already_have_an_account"
+        android:text="Already have an account?"
+        android:clickable="true"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:layout_below="@id/RegSubmitButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        />
+
+
+
+</RelativeLayout>

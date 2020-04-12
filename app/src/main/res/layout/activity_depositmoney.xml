@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DepositmoneyActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/atmbackg"
+        android:alpha="0.35"
+        />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:hint="Enter The Amount"
+        android:id="@+id/amountForDeposition"
+        android:textSize="45sp"
+        android:background="@drawable/contactbox"
+        android:layout_margin="10dp"
+        android:padding="8dp"
+        android:inputType="numberDecimal"
+        />
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/depositMoneyImageView"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/depositmoney"
+        android:layout_below="@id/amountForDeposition"
+        android:layout_marginTop="50dp"
+        android:clickable="true"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Deposit Money"
+        android:textStyle="bold"
+        android:textSize="23dp"
+        android:id="@+id/depositMoneyTextView"
+        android:layout_below="@+id/depositMoneyImageView"
+        android:layout_centerHorizontal="true"
+        android:clickable="true"/>
+
+
+</RelativeLayout>
