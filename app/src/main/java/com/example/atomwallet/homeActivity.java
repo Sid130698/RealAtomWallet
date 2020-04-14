@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.NumberPicker;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,13 +27,16 @@ public class homeActivity extends AppCompatActivity {
     ImageView payMoney;
     TextView balance;
     static int val;
+    TextView userName;
+    String sUserName;
 
-    DatabaseReference reference;
+    DatabaseReference reference,databaseReferenceName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         InitializeFields();
+        updateUserName();
         updateBalance();
         logoutBtn.setOnClickListener(new View.OnClickListener() {
                                          @Override
@@ -47,7 +51,7 @@ public class homeActivity extends AppCompatActivity {
         payMoney.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                gotoAddmoney();
+                gotoAddContact();
             }
         });
         addMoney.setOnClickListener(new View.OnClickListener() {
@@ -58,6 +62,26 @@ public class homeActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    private void updateUserName() {
+        if (currentUser == null) {
+            gotoStartActivity();
+        } else {
+            databaseReferenceName = FirebaseDatabase.getInstance().getReference().child("users").child(currentUser.getUid());
+            databaseReferenceName.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    sUserName = dataSnapshot.child("name").getValue().toString();
+                    userName.setText(sUserName);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+        }
     }
 
     private void gotoDepositMoney() {
@@ -93,9 +117,9 @@ public class homeActivity extends AppCompatActivity {
         }
     }
 
-    private void gotoAddmoney() {
-        Intent gotopAddMoney=new Intent(homeActivity.this,AddmoneyActivity.class);
-        startActivity(gotopAddMoney);
+    private void gotoAddContact() {
+        Intent gotopAddContact=new Intent(homeActivity.this,Addcontacts.class);
+        startActivity(gotopAddContact);
     }
 
     @Override
@@ -115,7 +139,7 @@ public class homeActivity extends AppCompatActivity {
         balance=findViewById(R.id.balanceTextBox);
         mAuth=FirebaseAuth.getInstance();
         currentUser=mAuth.getCurrentUser();
-
+        userName=findViewById(R.id.userNameHomeTextView);
         logoutBtn=findViewById(R.id.logoutbtn);
         addMoney=findViewById(R.id.imageAddMoney);
         payMoney=findViewById(R.id.imagePayMoney);

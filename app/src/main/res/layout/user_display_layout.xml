@@ -22,6 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
         android:orientation="vertical"
+        android:clickable="true"
         android:background="@drawable/contactbox">
         <TextView
             android:id="@+id/userNameTextView"
@@ -32,6 +33,7 @@
             android:textStyle="bold"
             android:layout_marginTop="15dp"
             android:layout_marginLeft="25dp"
+            android:clickable="true"
 
             />
         <TextView
@@ -42,6 +44,7 @@
             android:textSize="24sp"
             android:layout_margin="5dp"
             android:textStyle="normal"
+            android:clickable="true"
             />
 
 

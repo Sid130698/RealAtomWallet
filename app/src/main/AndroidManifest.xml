@@ -12,7 +12,6 @@
         <activity android:name=".DepositmoneyActivity"></activity>
         <activity android:name=".sendmoney" />
         <activity android:name=".Addcontacts" />
-        <activity android:name=".AddmoneyActivity" />
         <activity android:name=".StartActivity" />
         <activity android:name=".RegistrationActivity" />
         <activity android:name=".homeActivity">

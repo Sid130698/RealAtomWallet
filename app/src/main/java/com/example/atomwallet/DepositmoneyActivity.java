@@ -30,7 +30,7 @@ EditText amountDeposit;
 ImageView depositImage;
 FirebaseAuth mAuth;
 FirebaseUser currentUser;
-DatabaseReference rootRef,reference;
+DatabaseReference rootRef,reference,checkRef;
 int oldValue,newValue;
 TextView depositMoneyText;
     @Override

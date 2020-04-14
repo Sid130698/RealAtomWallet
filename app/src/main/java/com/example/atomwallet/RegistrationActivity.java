@@ -79,6 +79,18 @@ public class RegistrationActivity extends AppCompatActivity {
                 }
             }
         });
+        HashMap<String,String> defaultBalanceMap=new HashMap<>();
+        defaultBalanceMap.put("balance","100");
+        defaultBalanceMap.put("uid",currentUserId);
+        rootref.child("balances").child(currentUserId).setValue(defaultBalanceMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful()){
+                    Toast.makeText(RegistrationActivity.this, "Current Balance is $100", Toast.LENGTH_SHORT).show();
+
+                }
+            }
+        });
     }
 
     private void gotoLoginpage() {

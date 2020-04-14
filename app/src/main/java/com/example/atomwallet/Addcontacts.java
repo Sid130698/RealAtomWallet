@@ -5,16 +5,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -22,6 +25,8 @@ public class Addcontacts extends AppCompatActivity {
     RecyclerView addContactRecyclerList;
     DatabaseReference rootref;
     FirebaseAuth mAuth;
+    FirebaseUser currentUser;
+    String currentUserId;
 
 
     @Override
@@ -38,11 +43,20 @@ public class Addcontacts extends AppCompatActivity {
                 holder.name.setText(model.getName());
                 Log.d("ringring",model.getPhoneNumber());
                 holder.phoneNumber.setText(model.getPhoneNumber());
-                holder.itemView.setOnClickListener(new View.OnClickListener() {
+
+                holder.name.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        String userId;
-                        userId=getRef(position).getKey();
+                        String visitorUserId;
+                        visitorUserId=getRef(position).getKey();
+
+
+
+                        if(currentUserId.equals(visitorUserId)){
+                            Toast.makeText(Addcontacts.this, "Can't send money to yourself", Toast.LENGTH_SHORT).show();
+                        }
+                        else
+                            gotoSendMoney(visitorUserId);
 
                     }
                 });
@@ -63,14 +77,36 @@ public class Addcontacts extends AppCompatActivity {
        adapter.startListening();
     }
 
+    private void gotoStartActivity() {
+        Intent gotoStartActivity= new Intent(Addcontacts.this,StartActivity.class);
+        startActivity(gotoStartActivity);
+    }
+
+    private void gotoSendMoney(String visitorUserId) {
+
+        Intent gotoSendMoney=new Intent(Addcontacts.this,sendmoney.class);
+        gotoSendMoney.putExtra("visitorUserId",visitorUserId);
+        startActivity(gotoSendMoney);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_addcontacts);
+        initializeFields();
         addContactRecyclerList=findViewById(R.id.AddContactsRecyclerLayout);
         addContactRecyclerList.setLayoutManager(new LinearLayoutManager(this));
         rootref= FirebaseDatabase.getInstance().getReference().child("users");
 
+    }
+
+    private void initializeFields() {
+        mAuth=FirebaseAuth.getInstance();
+        currentUser=mAuth.getCurrentUser();
+        if(currentUser==null)
+            gotoStartActivity();
+        else
+            currentUserId=currentUser.getUid();
     }
 
     public  class addContactView extends RecyclerView.ViewHolder {
@@ -80,6 +116,8 @@ public class Addcontacts extends AppCompatActivity {
             super(itemView);
             name=itemView.findViewById(R.id.userNameTextView);
             phoneNumber=itemView.findViewById(R.id.userPhoneNumberTextView);
+
+
         }
     }
 
