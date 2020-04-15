@@ -38,7 +38,8 @@ public class sendmoney extends AppCompatActivity {
     String recieversName;
     int count=0;
     double phoneNumber;
-    DatabaseReference currentUserRef,recieverAccountRef,recieversNameRef;
+    DatabaseReference currentUserRef,recieverAccountRef,recieversNameRef,trans;
+    Transaction transaction;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +66,7 @@ public class sendmoney extends AppCompatActivity {
 
         amount=Integer.parseInt(sAmountEntered);
         final String recieverUserId=getIntent().getExtras().get("visitorUserId").toString();
-
+        transaction=new Transaction(currentUserId,recieverUserId,sAmountEntered);
         recieverAccountRef=FirebaseDatabase.getInstance().getReference().child("balances").child(recieverUserId);
         recieverAccountRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -73,7 +74,11 @@ public class sendmoney extends AppCompatActivity {
                 if(dataSnapshot.exists()){
                 String amount=dataSnapshot.child("balance").getValue().toString();
                int  recieversoldamount=Integer.parseInt(amount);
-                    updateRecieverBalace(recieversoldamount,recieverUserId);}
+                    updateRecieverBalace(recieversoldamount,recieverUserId);
+                    String key=trans.child(recieverUserId).push().getKey();
+                    trans.child(recieverUserId).child(key).setValue(transaction);
+                    key=trans.child(currentUserId).push().getKey();
+                    trans.child(currentUserId).child(key).setValue(transaction);}
                 else{
                     Toast.makeText(sendmoney.this, "Couldn't send weaker conection", Toast.LENGTH_SHORT).show();
                     gotoHomeActivity();
@@ -166,6 +171,7 @@ public class sendmoney extends AppCompatActivity {
         mAuth=FirebaseAuth.getInstance();
         currentUserId=mAuth.getCurrentUser().getUid();
         currentUserRef= FirebaseDatabase.getInstance().getReference().child("balances").child(currentUserId);
+        trans=FirebaseDatabase.getInstance().getReference().child("transactions");
 
     }
 }

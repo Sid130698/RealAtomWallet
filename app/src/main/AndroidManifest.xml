@@ -9,7 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".DepositmoneyActivity"></activity>
+        <activity android:name=".HistoryActivity"></activity>
+        <activity android:name=".ChatActvity" />
+        <activity android:name=".Findfriend" />
+        <activity android:name=".DepositmoneyActivity" />
         <activity android:name=".sendmoney" />
         <activity android:name=".Addcontacts" />
         <activity android:name=".StartActivity" />

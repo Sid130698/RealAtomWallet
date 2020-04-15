@@ -87,6 +87,9 @@ TextView depositMoneyText;
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if(task.isSuccessful()){
+                                    DatabaseReference trans=rootRef.child("transactions").child(currentUserId);
+                                    String key=trans.push().getKey();
+                                    trans.child(key).setValue(new Transaction("",currentUserId,amountDepositByUser));
                                     Toast.makeText(DepositmoneyActivity.this, "Amount updated to Wallet " + newBal, Toast.LENGTH_LONG).show();
                                     gotoHomeScreen();
                                 }

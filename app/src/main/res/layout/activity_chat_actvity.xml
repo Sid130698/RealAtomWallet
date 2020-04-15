@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ChatActvity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/atmbackg"
+        android:alpha="0.35"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/chatActivityRecyclerView"
+        android:layout_above="@id/chatActivityLinearLayout"
+        />
+  <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="60dp"
+      android:layout_alignParentBottom="true"
+      android:id="@+id/chatActivityLinearLayout"
+      android:orientation="horizontal">
+      <EditText
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:hint="Type Message here..."
+          android:textSize="21sp"
+          android:padding="3sp"
+          android:layout_alignParentBottom="true"
+          android:layout_margin="8dp"
+          android:id="@+id/chatActivityEditText"
+          android:background="#ffc8b3"
+          android:maxLines="5"
+          android:layout_toStartOf="@id/sendButtonChatActivity"
+
+          />
+      <ImageButton
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:src="@drawable/sendmoney"
+          android:id="@+id/sendButtonChatActivity"
+          android:clickable="true"
+          android:layout_alignParentEnd="true"/>
+
+  </RelativeLayout>
+
+</RelativeLayout>

@@ -25,6 +25,8 @@ public class homeActivity extends AppCompatActivity {
     ImageView logoutBtn;
     ImageView addMoney;
     ImageView payMoney;
+    ImageView chatImage;
+    ImageView imageHistory;
     TextView balance;
     static int val;
     TextView userName;
@@ -60,8 +62,29 @@ public class homeActivity extends AppCompatActivity {
                 gotoDepositMoney();
             }
         });
+        chatImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                gotoFindFriends();
+            }
+        });
+        imageHistory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                gotoHistoryActivity();
+            }
+        });
 
+    }
 
+    private void gotoHistoryActivity() {
+        Intent gotoHistoryActivity =new Intent (homeActivity.this,HistoryActivity.class);
+        startActivity(gotoHistoryActivity);
+    }
+
+    private void gotoFindFriends() {
+        Intent gotoFindFriends = new Intent(homeActivity.this,Findfriend.class);
+        startActivity(gotoFindFriends);
     }
 
     private void updateUserName() {
@@ -143,6 +166,8 @@ public class homeActivity extends AppCompatActivity {
         logoutBtn=findViewById(R.id.logoutbtn);
         addMoney=findViewById(R.id.imageAddMoney);
         payMoney=findViewById(R.id.imagePayMoney);
+        chatImage=findViewById(R.id.chatIconImageView);
+        imageHistory=findViewById(R.id.imageHistory);
     }
 }
 
