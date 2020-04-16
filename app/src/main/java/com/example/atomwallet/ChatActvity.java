@@ -53,7 +53,7 @@ public class ChatActvity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String name=dataSnapshot.child("name").getValue().toString();
-                Toast.makeText(ChatActvity.this, "Inside chat"+name+"", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ChatActvity.this, "Inside chat : "+name+"", Toast.LENGTH_SHORT).show();
             }
 
             @Override

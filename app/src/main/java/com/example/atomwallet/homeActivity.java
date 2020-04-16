@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -18,6 +19,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 public class homeActivity extends AppCompatActivity {
     FirebaseUser currentUser;
@@ -28,11 +30,12 @@ public class homeActivity extends AppCompatActivity {
     ImageView chatImage;
     ImageView imageHistory;
     TextView balance;
+    ImageView profilePic;
     static int val;
     TextView userName;
     String sUserName;
 
-    DatabaseReference reference,databaseReferenceName;
+    DatabaseReference reference,databaseReferenceName,profilePicRef;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +43,7 @@ public class homeActivity extends AppCompatActivity {
         InitializeFields();
         updateUserName();
         updateBalance();
+        updateProfilePic();
         logoutBtn.setOnClickListener(new View.OnClickListener() {
                                          @Override
                                          public void onClick(View v) {
@@ -74,6 +78,42 @@ public class homeActivity extends AppCompatActivity {
                 gotoHistoryActivity();
             }
         });
+        profilePic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                gotoSelectPicAcitvity();
+            }
+        });
+
+    }
+
+    private void updateProfilePic() {
+        if(currentUser==null){
+            gotoStartActivity();
+        }
+        else{
+            profilePicRef=FirebaseDatabase.getInstance().getReference().child("profilePictures").child(currentUser.getUid());
+            profilePicRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if(dataSnapshot.exists()){
+                        String sProfilePicUrl=dataSnapshot.child("profilePic").getValue().toString();
+                        Log.d("galti",sProfilePicUrl);
+                        Picasso.get().load(sProfilePicUrl).resize(50,50).centerCrop().into(profilePic);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+        }
+    }
+
+    private void gotoSelectPicAcitvity() {
+        Intent gotoSelectPicActivity=new Intent(homeActivity.this,selectpicActivity.class);
+        startActivity(gotoSelectPicActivity);
 
     }
 
@@ -125,7 +165,7 @@ public class homeActivity extends AppCompatActivity {
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if (dataSnapshot.exists()) {
                         String newBalance = dataSnapshot.child("balance").getValue().toString();
-                        balance.setText("Balance= $ " + newBalance);
+                        balance.setText("Balance= ₹" + newBalance);
                         val=Integer.parseInt(newBalance);
                     } else
                         balance.setText("Balance =$0");
@@ -168,6 +208,10 @@ public class homeActivity extends AppCompatActivity {
         payMoney=findViewById(R.id.imagePayMoney);
         chatImage=findViewById(R.id.chatIconImageView);
         imageHistory=findViewById(R.id.imageHistory);
+        profilePic=findViewById(R.id.profilePhotoImageView);
+
+
+
     }
 }
 

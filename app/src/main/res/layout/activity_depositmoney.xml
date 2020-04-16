@@ -19,6 +19,7 @@
         android:textSize="45sp"
         android:background="@drawable/contactbox"
         android:layout_margin="10dp"
+        android:elevation="4dp"
         android:padding="8dp"
         android:inputType="numberDecimal"
         />
@@ -30,7 +31,8 @@
         android:src="@drawable/depositmoney"
         android:layout_below="@id/amountForDeposition"
         android:layout_marginTop="50dp"
-        android:clickable="true"/>
+        android:clickable="true"
+        android:elevation="7dp"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

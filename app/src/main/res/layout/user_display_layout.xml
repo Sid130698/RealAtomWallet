@@ -9,12 +9,15 @@
         android:layout_margin="16dp"
         android:orientation="horizontal"
         android:background="@drawable/contactbox"
-        android:clickable="true">                                                  >
+        android:clickable="true"
+        android:elevation="4dp">                                                  >
 
     <ImageView
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:src="@drawable/usernamelogo"/>
+        android:src="@drawable/usernamelogo"
+        android:id="@+id/contactsProfilePicImageView"
+        android:elevation="8dp"/>
 
 
     <LinearLayout
@@ -23,12 +26,14 @@
         android:layout_margin="15dp"
         android:orientation="vertical"
         android:clickable="true"
+        android:elevation="5dp"
         android:background="@drawable/contactbox">
         <TextView
             android:id="@+id/userNameTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="UserName"
+            android:elevation="4dp"
             android:textSize="24sp"
             android:textStyle="bold"
             android:layout_marginTop="15dp"

@@ -11,20 +11,25 @@ import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 public class Findfriend extends AppCompatActivity {
 RecyclerView findFriendRecyclerList;
 FirebaseAuth mAuth;
 FirebaseUser currentuser;
-DatabaseReference rootref;
+DatabaseReference rootref,profilePicRef;
 String currentUserId;
 
     @Override
@@ -33,7 +38,26 @@ String currentUserId;
         FirebaseRecyclerOptions<Contacts> options=new FirebaseRecyclerOptions.Builder<Contacts>().setQuery(rootref,Contacts.class).build();
         FirebaseRecyclerAdapter<Contacts,addContactsView> adapter=new FirebaseRecyclerAdapter<Contacts, addContactsView>(options) {
             @Override
-            protected void onBindViewHolder(@NonNull addContactsView holder, final int position, @NonNull Contacts model) {
+            protected void onBindViewHolder(@NonNull final addContactsView holder, final int position, @NonNull Contacts model) {
+
+                profilePicRef=FirebaseDatabase.getInstance().getReference().child("profilePictures").child(getRef(position).getKey());
+                profilePicRef.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if(dataSnapshot.exists()){
+                            String friendsProfilePicUrl=dataSnapshot.child("profilePic").getValue().toString();
+                            Picasso.get().load(friendsProfilePicUrl).resize(150,150).into(holder.contactProfilePicture);
+                        }
+                        else{
+                            holder.contactProfilePicture.setImageResource(R.drawable.usernamelogo);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
                 holder.name.setText(model.getName());
                 holder.phoneNumber.setText(model.getPhoneNumber());
                 holder.name.setOnClickListener(new View.OnClickListener() {
@@ -95,10 +119,12 @@ String currentUserId;
     }
     public class addContactsView extends RecyclerView.ViewHolder{
         public TextView name,phoneNumber;
+        public ImageView contactProfilePicture;
         public addContactsView(@NonNull View itemView) {
             super(itemView);
             name=itemView.findViewById(R.id.userNameTextView);
             phoneNumber=itemView.findViewById(R.id.userPhoneNumberTextView);
+            contactProfilePicture=itemView.findViewById(R.id.contactsProfilePicImageView);
         }
     }
 }

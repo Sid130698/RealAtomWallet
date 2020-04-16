@@ -24,6 +24,7 @@
         android:textColorHint="#800080"
         android:id="@+id/sendMoneyEditText"
         android:layout_marginTop="25dp"
+        android:elevation="10dp"
         android:padding="8dp"
         android:backgroundTint="#ffc8b3"
         android:inputType="number"/>
@@ -35,6 +36,7 @@
         android:layout_marginTop="45dp"
         android:layout_centerHorizontal="true"
         android:id="@+id/sendMoneyImageView"
+        android:elevation="10dp"
         android:clickable="true"
         />
     <TextView
