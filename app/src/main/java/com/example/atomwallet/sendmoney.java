@@ -33,7 +33,7 @@ public class sendmoney extends AppCompatActivity {
     ImageView sendMoneyImg;
     FirebaseAuth mAuth;
     FirebaseUser currentUser;
-    String currentUserId;
+    String currentUserId,recieverUserId;
     int amount=0;
     String recieversName;
     int count=0;
@@ -65,10 +65,10 @@ public class sendmoney extends AppCompatActivity {
         String sAmountEntered=amountEntered.getText().toString();
 
         amount=Integer.parseInt(sAmountEntered);
-        final String recieverUserId=getIntent().getExtras().get("visitorUserId").toString();
-        transaction=new Transaction(currentUserId,recieverUserId,sAmountEntered);
+        recieverUserId=getIntent().getExtras().get("visitorUserId").toString();
+        transaction=new Transaction(currentUserId,recieverUserId,sAmountEntered,false);
         recieverAccountRef=FirebaseDatabase.getInstance().getReference().child("balances").child(recieverUserId);
-        recieverAccountRef.addValueEventListener(new ValueEventListener() {
+        recieverAccountRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()){
@@ -78,7 +78,9 @@ public class sendmoney extends AppCompatActivity {
                     String key=trans.child(recieverUserId).push().getKey();
                     trans.child(recieverUserId).child(key).setValue(transaction);
                     key=trans.child(currentUserId).push().getKey();
-                    trans.child(currentUserId).child(key).setValue(transaction);}
+                    trans.child(currentUserId).child(key).setValue(transaction);
+
+                 }
                 else{
                     Toast.makeText(sendmoney.this, "Couldn't send weaker conection", Toast.LENGTH_SHORT).show();
                     gotoHomeActivity();
@@ -124,7 +126,6 @@ public class sendmoney extends AppCompatActivity {
         } else {
 
             int newAmount,uamount ;
-            newAmount=0;
             newAmount=amount;
 
             amount=0;

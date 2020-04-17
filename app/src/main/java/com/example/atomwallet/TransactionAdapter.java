@@ -29,9 +29,8 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
 
     public TransactionAdapter(ArrayList<Transaction> list, String currUserID) {
         this.list=list;
-
         this.currUserID= currUserID;
-        userRef= FirebaseDatabase.getInstance().getReference("users");
+
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
@@ -56,7 +55,32 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
-         final Transaction transaction =list.get(position);
+        final Transaction transaction =list.get(position);
+        holder.tvAmount.setText(transaction.getAmount());
+        if(transaction.isPurchase())
+        {
+            holder.ivTask.setImageResource(R.drawable.cart);
+            userRef=FirebaseDatabase.getInstance().getReference("shops");
+            userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    Shop shop;
+                    for(DataSnapshot snap : dataSnapshot.getChildren())
+                    {
+                        shop=snap.getValue(Shop.class);
+                        if(shop.getId().equals(transaction.getReciever()))
+                            holder.tvName.setText(shop.getName());
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+        }
+        else{
+        userRef= FirebaseDatabase.getInstance().getReference("users");
         String name;
         if(transaction.getSender().isEmpty())
         {
@@ -112,8 +136,8 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
             });
             holder.ivTask.setImageResource(R.drawable.recieve);
 
-        }
-        holder.tvAmount.setText(transaction.getAmount());
+        }}
+
     }
 
     @Override

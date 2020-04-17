@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/atmbackg"
+    tools:context=".PayActivity">
+
+    <TextView
+        android:id="@+id/tvId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/alef"
+        android:text="Order ID: 12345"
+        android:textColor="@android:color/black"
+        android:textSize="36sp" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvButton"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvAmount"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
+        app:cardBackgroundColor="@color/colorPrimaryDark"
+        app:cardCornerRadius="25dp"
+        app:cardUseCompatPadding="false">
+
+        <TextView
+            android:id="@+id/tvContinue"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:clickable="true"
+            android:gravity="center"
+            android:text="Continue"
+            android:textColor="@android:color/white"
+            android:textSize="18sp" />
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/tvAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvId"
+        android:fontFamily="@font/alef"
+        android:text="Total amount = 356.3"
+        android:textColor="@android:color/black"
+        android:textSize="36sp" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/cvButton"
+        android:text="Pay only on receiving your order" />
+</RelativeLayout>

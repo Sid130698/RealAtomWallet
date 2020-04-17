@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.atomwallet">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,7 +11,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".selectpicActivity"></activity>
+        <activity android:name=".OrdersActivity"></activity>
+        <activity android:name=".HomeActivity2" />
+        <activity android:name=".PayActivity" />
+        <activity android:name=".BillActivity" />
+        <activity android:name=".PurchaseActivity" />
+        <activity android:name=".ShopActivity" />
+        <activity android:name=".selectpicActivity" />
         <activity android:name=".HistoryActivity" />
         <activity android:name=".ChatActvity" />
         <activity android:name=".Findfriend" />
@@ -26,8 +34,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
-    </application>
 
-    <uses-permission android:name="android.permission.INTERNET" />
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+    </application>
 
 </manifest>

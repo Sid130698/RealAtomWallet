@@ -1,14 +1,16 @@
 package com.example.atomwallet;
 
 public class Transaction {
-    public String sender,reciever,amount;
+    private String sender,reciever,amount;
+    private boolean isPurchase;
 
     public Transaction(){}
 
-    public Transaction(String sender, String reciever, String amount) {
+    public Transaction(String sender, String reciever, String amount, boolean isPurchase) {
         this.sender = sender;
         this.reciever = reciever;
         this.amount = amount;
+        this.isPurchase=isPurchase;
     }
 
     public String getSender() {
@@ -33,5 +35,13 @@ public class Transaction {
 
     public void setAmount(String amount) {
         this.amount = amount;
+    }
+
+    public boolean isPurchase() {
+        return isPurchase;
+    }
+
+    public void setPurchase(boolean purchase) {
+        isPurchase = purchase;
     }
 }

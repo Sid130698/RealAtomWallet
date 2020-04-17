@@ -89,7 +89,7 @@ TextView depositMoneyText;
                                 if(task.isSuccessful()){
                                     DatabaseReference trans=rootRef.child("transactions").child(currentUserId);
                                     String key=trans.push().getKey();
-                                    trans.child(key).setValue(new Transaction("",currentUserId,amountDepositByUser));
+                                    trans.child(key).setValue(new Transaction("",currentUserId,amountDepositByUser,false));
                                     Toast.makeText(DepositmoneyActivity.this, "Amount updated to Wallet " + newBal, Toast.LENGTH_LONG).show();
                                     gotoHomeScreen();
                                 }

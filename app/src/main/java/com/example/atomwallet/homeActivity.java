@@ -31,6 +31,7 @@ public class homeActivity extends AppCompatActivity {
     ImageView imageHistory;
     TextView balance;
     ImageView profilePic;
+    ImageView imagePurchase;
     static int val;
     TextView userName;
     String sUserName;
@@ -84,7 +85,19 @@ public class homeActivity extends AppCompatActivity {
                 gotoSelectPicAcitvity();
             }
         });
+        imagePurchase.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                gotoShopActivity();
+            }
+        });
 
+    }
+
+    private void gotoShopActivity()
+    {
+        Intent intent=new Intent(homeActivity.this,ShopActivity.class);
+        startActivityForResult(intent,1);
     }
 
     private void updateProfilePic() {
@@ -209,9 +222,30 @@ public class homeActivity extends AppCompatActivity {
         chatImage=findViewById(R.id.chatIconImageView);
         imageHistory=findViewById(R.id.imageHistory);
         profilePic=findViewById(R.id.profilePhotoImageView);
+        imagePurchase=findViewById(R.id.imagePurchase);
+        DatabaseReference shopRef=FirebaseDatabase.getInstance().getReference("shops");
+        shopRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Shop shop;
+                for(DataSnapshot snap: dataSnapshot.getChildren())
+                {
+                    String currUserId=currentUser.getUid();
+                    shop=snap.getValue(Shop.class);
+                    if(shop.getId().equals(currUserId))
+                    {
+                        Intent intent=new Intent(homeActivity.this,HomeActivity2.class);
+                        intent.putExtra("name",shop.getName());
+                        startActivity(intent);
+                    }
+                }
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-
+            }
+        });
     }
 }
 

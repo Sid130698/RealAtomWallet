@@ -36,6 +36,7 @@ public class HistoryActivity extends AppCompatActivity {
                 for(DataSnapshot snap : dataSnapshot.getChildren())
                     list.add(snap.getValue(Transaction.class));
                 Toast.makeText(HistoryActivity.this,list.size()+"",Toast.LENGTH_SHORT).show();
+                reverseList(list);
                 myAdapter=new TransactionAdapter(list,currUserID);
                 rvHistory.setAdapter(myAdapter);
 
@@ -57,5 +58,18 @@ public class HistoryActivity extends AppCompatActivity {
         rvHistory.setLayoutManager( new LinearLayoutManager(this));
         currUserID= FirebaseAuth.getInstance().getCurrentUser().getUid();
         transRef= FirebaseDatabase.getInstance().getReference("transactions").child(currUserID);
+    }
+
+    public static void reverseList(ArrayList<Transaction> list)
+    {
+        int size=list.size();
+        Transaction temp;
+        for(int i=0;i<size/2;++i)
+        {
+            temp=list.get(i);
+            list.set(i,list.get(size-1-i));
+            list.set(size-1-i,temp);
+
+        }
     }
 }
